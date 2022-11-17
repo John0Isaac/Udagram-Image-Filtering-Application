@@ -27,7 +27,7 @@ script:
 
 #Task to execute after the build process is successful
 after_success:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
   - docker push john0isaac/udagram-reverseproxy:v4a
   - docker push john0isaac/udagram-api-feed:v4a
   - docker push john0isaac/udagram-api-user:v4a
