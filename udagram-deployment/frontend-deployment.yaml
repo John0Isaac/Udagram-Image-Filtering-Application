@@ -1,13 +1,24 @@
-apiVersion: v1
-kind: Service
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  labels:
-    service: api-user
-  name: api-user
+  name: frontend
 spec:
-  ports:
-  - name: "8080"
-    port: 8080
-    targetPort: 8080
   selector:
-    service: api-user
+    matchLabels:
+      run: frontend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: frontend
+    spec:
+      containers:
+      - name: udagram-frontend
+        image: john0isaac/udagram-frontend:v6
+        ports: 
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
